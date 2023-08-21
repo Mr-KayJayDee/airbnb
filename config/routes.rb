@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   # If going to /cars redirect to /
   root to: "cars#index"
+  get "/cars", to: redirect("/")
   resources :cars do
     resources :bookings, only: [:new, :create]
   end
