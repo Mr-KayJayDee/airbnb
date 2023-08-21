@@ -33,14 +33,14 @@ class CarsController < ApplicationController
 
   # PATCH/PUT /cars/1
   def update
-    if @garden.update(garden_params)
+    if @car.update(car_params)
       redirect_to @car, notice: "Car was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /gardens/1
+  # DELETE /car/1
   def destroy
     @car.destroy
     redirect_to car_url, notice: "Car was successfully destroyed.", status: :see_other
