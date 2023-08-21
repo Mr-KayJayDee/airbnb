@@ -6,4 +6,7 @@ class User < ApplicationRecord
   # validates devise first_name and last_name
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  has_many :cars, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 end
