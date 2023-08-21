@@ -8,7 +8,7 @@ class CarsController < ApplicationController
 
   # GET /cars/1
   def show
-    @car = Car.new
+    @car = Car.find(params[:id])
   end
 
   # GET /cars/new
