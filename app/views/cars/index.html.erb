@@ -1,0 +1,9 @@
+<h1>Cars list</h1>
+
+<% @cars.each do |car| %>
+    <div class="border border-dark text-center m-2 p-2">
+        <p><%= car.brand %></p>
+        <p><%= car.model %></p>
+        <p><%= car.price_per_day %></p>
+    </div>
+<% end %>
