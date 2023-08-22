@@ -56,7 +56,7 @@ module Profile
 
     # Only allow a list of trusted parameters through.
     def car_params
-      params.require(:car).permit(:brand, :model, :price_per_day, :user_id)
+      params.require(:car).permit(:brand, :model, :price_per_day, :user_id, :photo)
     end
   end
 end
