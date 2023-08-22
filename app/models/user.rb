@@ -8,5 +8,6 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   has_many :cars, dependent: :destroy
+  has_many :rented_bookings, through: :cars, class_name: 'Booking', source: :bookings
   has_many :bookings, dependent: :destroy
 end
