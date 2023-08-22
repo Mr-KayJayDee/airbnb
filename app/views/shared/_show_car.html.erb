@@ -1,9 +1,12 @@
-<div class="border border-dark text-center my-2 p-2">
-    <p><%= @car.id %></p>
-    <p><%= @car.brand %></p>
-    <p><%= @car.model %></p>
-    <p><%= @car.price_per_day %></p>
-    <%= cl_image_tag @car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid rounded" %>
+<div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-2 bg-white rounded">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h1><strong><%= @car.brand %></strong></h1>
+      </div>
+      <p class="fs-3"><strong><%= @car.price_per_day %>$</strong>/day</p>
+    </div>
+    <h3><%= @car.model %></h3>
+    <%= cl_image_tag @car.photo.key, class: "img-fluid rounded" %>
 </div>
 <%= link_to 'Book this car', new_car_booking_path(@car), class:"btn btn-primary" %>
 <%= yield(@car) if block_given? %>

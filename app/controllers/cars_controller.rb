@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
   # GET /cars
   def index
-    @cars = Car.all
+    @cars = Car.all.sort_by(&:price_per_day).reverse
   end
 
   # GET /cars/1
