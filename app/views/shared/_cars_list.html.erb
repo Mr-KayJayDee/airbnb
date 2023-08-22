@@ -1,0 +1,18 @@
+<div class="row">
+  <% @cars.each do |car| %>
+    <div class="col-md-4 mb-4">
+      <div class="border border-dark my-2 p-2 d-flex justify-content-between flex-column">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h1><strong><%= car.brand %></strong></h1>
+          <h3><%= car.model %></h3>
+        </div>
+        <p class="fs-3"><strong><%= car.price_per_day %>$</strong>/day</p>
+      </div>
+        <%= cl_image_tag car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
+        <%= yield(car) if block_given? %>
+        <%= link_to "Book this car", new_car_booking_path(car), class: "btn btn-primary mt-2" %>
+      </div>
+    </div>
+  <% end %>
+</div>

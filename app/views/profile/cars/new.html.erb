@@ -1,0 +1,8 @@
+<%= simple_form_for @car do |f| %>
+  <%= f.input :brand %>
+  <%= f.input :model %>
+  <%= f.input :price_per_day %>
+  <%= f.button :submit %>
+  <%= link_to 'Back', cars_path %>
+<% end %>
+
