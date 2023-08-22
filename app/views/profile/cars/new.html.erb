@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="text-center"></div>
         <div class="form-control m-4git p-4 bg-white" >
-          <%= simple_form_for @car do |f| %>
+          <%= simple_form_for [:profile, @car] do |f| %>
             <%= f.input :brand %>
             <%= f.input :model %>
             <%= f.input :price_per_day %>
