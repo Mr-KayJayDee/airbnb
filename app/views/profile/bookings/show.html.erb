@@ -1,7 +1,16 @@
 <h1>Booking Details</h1>
 
-<div class="border border-dark text-center m-2 p-2">
-    <%= @booking.start_date %>
-    <%= @booking.end_date %>
-    <%= @booking.car.price_per_day %>
+<div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-2 bg-white rounded">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h1><strong><%= @booking.car.brand %></strong></h1>
+      </div>
+      <p class="fs-3"><strong><%= @booking.car.price_per_day %>$</strong>/day</p>
+    </div>
+    <h3><%= @booking.car.model %></h3>
+    <p class="fs-3">Booked by <strong><%= @booking.user.first_name %></strong></p>
+    <p class="fs-3">From <strong><%= @booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @booking.end_date.strftime("%d/%m/%Y") %></strong></p>
+    <%= cl_image_tag @booking.car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid rounded" %>
 </div>
+
+<%= link_to 'Back', cars_path, class:"btn btn-secondary" %>

@@ -7,16 +7,17 @@
 <div class="row">
   <% @rented_bookings.each do |rented_booking| %>
     <div class="col-md-4 mb-4">
-      <div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-2 bg-white rounded">
         <div class="d-flex justify-content-between">
           <div>
             <h1><strong><%= rented_booking.car.brand %></strong></h1>
-            <h3><%= rented_booking.car.model %></h3>
           </div>
+          <p class="fs-3"><strong><%= rented_booking.car.price_per_day %>$</strong>/day</p>
         </div>
-        <p class="fs-3"><strong><%= rented_booking.car.price_per_day %>$</strong>/day</p>
+        <h3><%= rented_booking.car.model %></h3>
         <p class="fs-3">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
         <%= cl_image_tag rented_booking.car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
+        <%= link_to "View booking", profile_booking_path(rented_booking), class: "btn btn-primary mt-2" %>
       </div>
     </div>
   <% end %>

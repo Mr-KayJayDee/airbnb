@@ -1,6 +1,19 @@
-<%= simple_form_for [@car, @booking] do |f| %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.button :submit %>
-  <%= link_to 'Back', car_path(@car) %>
-<% end %>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="text-center"></div>
+        <div class="form-control m-4git p-4 bg-white" >
+        <%= simple_form_for [@car, @booking] do |f| %>
+          <%= f.input :start_date,
+                    as: :string,
+                    input_html: { data: { controller: "datepicker" } } %>
+          <%= f.input :end_date,
+                    as: :string,
+                    input_html: { data: { controller: "datepicker" } } %>
+          <%= f.button :submit, class:"btn btn-primary" %>
+          <%= link_to 'Back', car_path(@car), class:"btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
