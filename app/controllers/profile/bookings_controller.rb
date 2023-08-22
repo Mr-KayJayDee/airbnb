@@ -1,6 +1,7 @@
 module Profile
   class BookingsController < ApplicationController
     def index
+      @rented_bookings = current_user.rented_bookings
       @bookings = Booking.where(user: current_user)
     end
 

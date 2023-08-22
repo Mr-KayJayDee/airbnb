@@ -1,6 +1,23 @@
-<h1>Cars i have booked</h1>
+<h1 class="mt-4">Cars i have booked</h1>
 
 <%= render "shared/bookings_list" %>
 
 <h1>Cars i have rented</h1>
 
+<div class="row">
+  <% @rented_bookings.each do |rented_booking| %>
+    <div class="col-md-4 mb-4">
+      <div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h1><strong><%= rented_booking.car.brand %></strong></h1>
+            <h3><%= rented_booking.car.model %></h3>
+          </div>
+        </div>
+        <p class="fs-3"><strong><%= rented_booking.car.price_per_day %>$</strong>/day</p>
+        <p class="fs-3">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
+        <%= cl_image_tag rented_booking.car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
+      </div>
+    </div>
+  <% end %>
+</div>
