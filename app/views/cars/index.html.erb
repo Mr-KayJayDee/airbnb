@@ -1,10 +1,5 @@
-<h1>Cars list</h1>
+<h1 class="mt-4">Cars list</h1>
 
-<% @cars.each do |car| %>
-    <div class="border border-dark text-center m-2 p-2">
-        <p><%= car.brand %></p>
-        <p><%= car.model %></p>
-        <p><%= car.price_per_day %></p>
-        <%= link_to 'Show Details', car_path(car) %>
-    </div>
+<%= render "shared/cars_list" do |car| %>
+  <%= link_to 'Show Details', car_path(car), class: "btn btn-primary mt-2" %>
 <% end %>

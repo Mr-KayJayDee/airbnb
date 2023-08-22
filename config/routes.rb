@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   resources :cars do
     resources :bookings, only: [:new, :create]
   end
+
+  namespace :profile do
+    resources :bookings, only: [:index, :show]
+    resources :cars
+  end
 end

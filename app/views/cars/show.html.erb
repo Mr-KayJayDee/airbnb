@@ -1,11 +1,3 @@
-<h1> Show Details </h1>
+<h1 class="mt-4">Show Details</h1>
 
-<div class="border border-dark text-center m-2 p-2">
-
-    <p><%= @car.id %></p>
-    <p><%= @car.brand %></p>
-    <p><%= @car.model %></p>
-    <p><%= @car.price_per_day %></p>
-</div>
-<%= link_to 'Booking', new_car_booking_path(@car) %>
-<%= link_to 'Back', cars_path %>
+<%= render "shared/show_car" %>
