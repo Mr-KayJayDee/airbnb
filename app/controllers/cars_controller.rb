@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: %i[ show edit update destroy ]
+  before_action :set_car, only: %i[show edit update destroy]
 
   # GET /cars
   def index
@@ -16,16 +16,16 @@ class CarsController < ApplicationController
     @car = Car.new
   end
 
-  # GET /carqs/1/edit
+  # GET /cars/1/edit
   def edit
   end
 
   # POST /cars
   def create
-    @car = Car.new(car_param)
-
-    if @garden.save
-      redirect_to @car, notice: "Garden was successfully created."
+    @car = Car.new(car_params)
+    @car.user = current_user
+    if @car.save
+      redirect_to car_path(@car), notice: "Car was successfully created.", status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class CarsController < ApplicationController
   # PATCH/PUT /cars/1
   def update
     if @car.update(car_params)
-      redirect_to @car, notice: "Car was successfully updated.", status: :see_other
+      redirect_to car_path, notice: "Car was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,14 +47,14 @@ class CarsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_car
-      @car = Car.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def car_param
-      params.require(:car).permit(:brand, :model, :price_per_day, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_car
+    @car = Car.find(params[:id])
+  end
 
+  # Only allow a list of trusted parameters through.
+  def car_params
+    params.require(:car).permit(:brand, :model, :price_per_day, :user_id)
+  end
 end

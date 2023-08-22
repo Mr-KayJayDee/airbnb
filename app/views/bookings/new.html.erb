@@ -1,0 +1,6 @@
+<%= simple_form_for [@car, @booking] do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.button :submit %>
+  <%= link_to 'Back', car_path(@car) %>
+<% end %>

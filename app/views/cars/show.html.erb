@@ -7,4 +7,5 @@
     <p><%= @car.model %></p>
     <p><%= @car.price_per_day %></p>
 </div>
+<%= link_to 'Booking', new_car_booking_path(@car) %>
 <%= link_to 'Back', cars_path %>
