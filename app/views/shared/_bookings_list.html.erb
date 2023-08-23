@@ -3,7 +3,7 @@
     <div class="col-md-3 mb-4">
       <%= link_to car_path(booking.car), style: 'color: inherit; text-decoration: none;' do %>
         <div class="d-flex justify-content-between flex-column rounded-4">
-          <%= cl_image_tag booking.car.photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
+          <%= cl_image_tag booking.car.photos.first.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
           <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= booking.car.brand %></span></p>
           <p class="mb-0"><%= booking.car.model %></p>
           <p class="fs-6 mb-0"><strong><%= number_with_delimiter(booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>

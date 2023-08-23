@@ -3,7 +3,29 @@
     <div class="col-md-3 my-4">
       <%= link_to car_path(car), style: 'color: inherit; text-decoration: none;' do %>
         <div class="d-flex justify-content-between flex-column rounded-4">
-          <%= cl_image_tag car.photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
+          <div id="carousel-<%= car.id %>" class="carousel slide">
+            <div class="carousel-indicators">
+              <% car.photos.each_with_index do |photo, index| %>
+                <button type="button" data-bs-target="#carousel-<%= car.id %>" data-bs-slide-to="<%= index %>" class="<%= index == 0 ? 'active' : '' %>" aria-current="<%= index == 0 ? 'true' : 'false' %>" aria-label="Slide <%= index + 1 %>"></button>
+              <% end %>
+            </div>
+            <div class="carousel-inner">
+              <% car.photos.each_with_index do |photo, index| %>
+                <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+                  <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
+                </div>
+              <% end %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= car.id %>" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= car.id %>" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <%# <%= cl_image_tag car.photos.first.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
           <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= car.brand %></span></p>
           <p class="mb-0"><%= car.model %></p>
           <p class="fs-6 mb-0"><strong><%= number_with_delimiter(car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
