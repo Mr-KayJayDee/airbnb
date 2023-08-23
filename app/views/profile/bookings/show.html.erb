@@ -5,7 +5,7 @@
       <div>
         <h1><strong><%= @booking.car.brand %></strong></h1>
       </div>
-      <p class="fs-3"><strong><%= @booking.car.price_per_day %>$</strong>/day</p>
+      <p class="fs-3"><strong><%= number_with_delimiter(@booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
     </div>
     <h3><%= @booking.car.model %></h3>
     <p class="fs-3">Booked by <strong><%= @booking.user.first_name %></strong></p>
@@ -13,4 +13,4 @@
     <%= cl_image_tag @booking.car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid rounded" %>
 </div>
 
-<%= link_to 'Back', cars_path, class:"btn btn-secondary" %>
+<%= link_to 'Back', cars_path, class:"btn secondary-btn" %>

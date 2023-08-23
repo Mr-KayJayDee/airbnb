@@ -1,18 +1,14 @@
 <div class="row">
   <% @cars.each do |car| %>
-    <div class="col-md-4 mb-4">
-      <div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-2 bg-white rounded">
-        <div class="d-flex justify-content-between">
-          <div>
-            <h1><strong><%= car.brand %></strong></h1>
-          </div>
-          <p class="fs-3"><strong><%= car.price_per_day %>$</strong>/day</p>
+    <div class="col-md-3 my-4">
+      <%= link_to car_path(car), style: 'color: inherit; text-decoration: none;' do %>
+        <div class="d-flex justify-content-between flex-column rounded-4">
+          <%= cl_image_tag car.photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
+          <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= car.brand %></span></p>
+          <p class="mb-0"><%= car.model %></p>
+          <p class="fs-6 mb-0"><strong><%= number_with_delimiter(car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
         </div>
-        <h3><%= car.model %></h3>
-        <%= cl_image_tag car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid" %>
-        <%= yield(car) if block_given? %>
-        <%= link_to "Book this car", new_car_booking_path(car), class: "btn btn-primary mt-2" %>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>

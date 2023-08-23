@@ -1,0 +1,38 @@
+.main-btn {
+    background-color: #95AAE8;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #95AAE8;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+        color: #95AAE8;
+    }
+}
+
+.danger-btn {
+    background-color: #e69690;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e69690;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+        color: #e69690;
+    }
+}
+
+.secondary-btn {
+    background-color: #959595;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #959595;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+        color: #959595;
+    }
+}

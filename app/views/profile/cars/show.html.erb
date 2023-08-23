@@ -1,5 +1,0 @@
-<h1>Car Details</h1>
-
-<%= render "shared/show_car" do |car| %>
-  <%= link_to 'Destroy', profile_car_path(@car), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete, class:"btn btn-danger" %>
-<% end %>

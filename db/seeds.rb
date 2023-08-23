@@ -8,19 +8,9 @@
 # db/seeds.rb
 require "faker"
 
-users = User.all
-
-# loop all users
-users.each do |user|
-  # create 3 cars for each user
-  3.times do
-    Car.create(user_id: user.id, brand: Faker::Vehicle.make, model: Faker::Vehicle.model, price_per_day: rand(50..200))
-  end
-
-  # create 3 bookings for each user
-  3.times do
-    Booking.create(user_id: user.id, car_id: rand(1..Car.count), start_date: Date.today + rand(1..10), end_date: Date.today + rand(11..20))
-  end
+# get all cars and add an address to them
+Car.all.each do |car|
+  puts "Adding address to #{car.brand} #{car.model}"
+  car.address = Faker::Address.full_address
+  car.save!
 end
-
-puts "Seed data has been created."

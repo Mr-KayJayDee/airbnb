@@ -7,11 +7,6 @@ module Profile
       @cars = Car.where(user: current_user)
     end
 
-    # GET /cars/1
-    def show
-      @car = Car.find(params[:id])
-    end
-
     # GET /cars/new
     def new
       @car = Car.new

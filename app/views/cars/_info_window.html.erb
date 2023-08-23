@@ -1,0 +1,8 @@
+<div class="text-start">
+  <h5>Car Information</h5>
+  <hr>
+  <p class="mb-0"><strong>Brand:</strong> Airbus</p>
+  <p class="mb-0"><strong>Model:</strong> Beluga</p>
+  <p class="mb-0"><strong>Price per Day:</strong> <%= number_with_delimiter(car.price_per_day, delimiter: ',', separator: '.') %>$/day</p>
+  <p class="mb-0"><strong>Location:</strong> <%= car.address %></p>
+</div>
