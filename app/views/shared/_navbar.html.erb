@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <% if !current_user.bookings.empty? %>
+          <% if !current_user.bookings.empty? || !current_user.rented_bookings.empty? %>
             <li class="nav-item">
               <%= link_to "My bookings", profile_bookings_path, class: "nav-link px-4" %>
             </li>
