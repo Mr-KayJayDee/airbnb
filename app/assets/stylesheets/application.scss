@@ -10,3 +10,26 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+@font-face {
+	font-family: "Inconsolata";
+	src: url("/app/assets/fonts/Inconsolata-VariableFont_wdth,wght.ttf")
+		format("variable");
+}
+
+* {
+	font-family: "Inconsolata", monospace;
+}
+
+.mapboxgl-ctrl-geocoder {
+	/* Your custom styles here */
+	background-color: #f4f4f4;
+	// no shadow
+	box-shadow: none;
+	border-radius: 0;
+	border: 1px solid #dee2e6;
+}
+
+.mapboxgl-canvas {
+	@extend .rounded-4;
+}

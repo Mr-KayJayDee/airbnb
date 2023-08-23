@@ -1,17 +1,33 @@
 <div class="container-fluid">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mt-4">
     <div class="col-md-6">
-      <div class="text-center"></div>
-        <div class="form-control m-4git p-4 bg-white" >
-          <%= simple_form_for [:profile, @car] do |f| %>
-            <%= f.input :brand %>
-            <%= f.input :model %>
-            <%= f.input :price_per_day %>
-            <%= f.input :photo, as: :file %>
-            <%= f.button :submit, class:"btn btn-primary" %>
-            <%= link_to 'Back', cars_path, class:"btn btn-secondary" %>
-          <% end %>
-        </div>
+      <div class="text-center">
+        <h2>Create a new car</h2>
+      </div>
+      <div class="form-control m-4 p-4 bg-white">
+        <%= simple_form_for [:profile, @car] do |f| %>
+          <%= f.input :brand %>
+          <%= f.input :model %>
+          <%= f.input :price_per_day %>
+          <%= f.input :photo, as: :file %>
+          <%= f.input :address,
+            input_html: { 
+              class: "d-none", 
+              data: {
+                address_autocomplete_target: "address"
+              }
+            },
+            wrapper_html: {
+              data: {
+                controller: "address-autocomplete", 
+                address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
+              }
+            }
+          %>
+          <%= f.button :submit, class: "btn main-btn" %>
+          <%= link_to 'Back', request.referer, class: "btn secondary-btn" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

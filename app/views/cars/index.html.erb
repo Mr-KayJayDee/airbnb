@@ -1,5 +1,8 @@
 <h1 class="mt-4">Cars list</h1>
 
-<%= render "shared/cars_list" do |car| %>
-  <%= link_to 'Show Details', car_path(car), class: "btn btn-info mt-2" %>
-<% end %>
+<div style="width: 100%; height: 300px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+<%= render "shared/cars_list" %>
