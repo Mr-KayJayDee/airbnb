@@ -2,7 +2,7 @@
   <div class="row justify-content-center mt-4">
     <div class="col-md-6">
       <div class="text-center">
-        <h2>Create a new car</h2>
+        <h2>Put your car for rent</h2>
       </div>
       <div class="form-control m-4 p-4 bg-white">
         <%= simple_form_for [:profile, @car] do |f| %>
@@ -24,7 +24,7 @@
               }
             }
           %>
-          <%= f.button :submit, class: "btn main-btn" %>
+          <%= f.button :submit, class: "btn main-btn", value: "Rent now" %>
           <%= link_to 'Back', request.referer, class: "btn secondary-btn" %>
         <% end %>
       </div>

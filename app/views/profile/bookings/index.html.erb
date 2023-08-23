@@ -1,11 +1,13 @@
 <h1 class="mt-4 text-center">Bookings</h1>
 
-<nav class="d-flex justify-content-center m-4">
-  <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
-    <button class="rounded-start-4 px-4 pt-2 nav-link active" id="booked-tab" data-bs-toggle="tab" data-bs-target="#booked" type="button" role="tab" aria-controls="booked" aria-selected="true">Booked Cars</button>
-    <button class="rounded-end-4 px-4 pt-2 nav-link" id="rented-tab" data-bs-toggle="tab" data-bs-target="#rented" type="button" role="tab" aria-controls="rented" aria-selected="false">Rented Cars</button>
-  </div>
-</nav>
+<% if !current_user.bookings.empty? && !current_user.rented_bookings.empty? %>
+  <nav class="d-flex justify-content-center mt-4">
+    <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+        <a class="rounded-start-4 px-4 pt-2 nav-link active" id="booked-tab" data-bs-toggle="tab" data-bs-target="#booked" type="button" role="tab" aria-controls="booked" aria-selected="true">Booked Cars</a>
+        <a class="rounded-end-4 px-4 pt-2 nav-link <%= current_user.bookings.empty? ? 'active' : '' %>" id="rented-tab" data-bs-toggle="tab" data-bs-target="#rented" type="button" role="tab" aria-controls="rented" aria-selected="false">Rented Cars</a>
+    </div>
+  </nav>
+<% end %>
 
 <div class="tab-content" id="nav-tabContent">
   <div class="pt-4 tab-pane fade show active p-4 bg-white rounded-4" id="booked" role="tabpanel" aria-labelledby="booked-tab" tabindex="0">
