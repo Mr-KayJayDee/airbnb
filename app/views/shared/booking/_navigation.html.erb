@@ -1,0 +1,8 @@
+<% if current_user.bookings.any? && current_user.rented_bookings.any? %>
+  <nav class="d-flex justify-content-center m-4">
+    <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+      <button class="rounded-start-4 px-4 pt-2 nav-link active" id="booked-tab" data-bs-toggle="tab" data-bs-target="#booked" type="button" role="tab" aria-controls="booked" aria-selected="true">Booked Cars</button>
+      <button class="rounded-end-4 px-4 pt-2 nav-link" id="rented-tab" data-bs-toggle="tab" data-bs-target="#rented" type="button" role="tab" aria-controls="rented" aria-selected="false">Rented Cars</button>
+    </div>
+  </nav>
+<% end %>
