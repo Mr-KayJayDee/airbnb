@@ -23,7 +23,7 @@ module Profile
       if @car.save
         redirect_to car_path(@car), notice: "Car was successfully created.", status: :see_other
       else
-        render :new, status: :unprocessable_entity
+
       end
     end
 
@@ -39,7 +39,7 @@ module Profile
     # DELETE /car/1
     def destroy
       @car.destroy
-      redirect_to profile_cars_path, notice: "Car was successfully destroyed.", status: :see_other
+      redirect_to profile_root_path, notice: "Car was successfully destroyed.", status: :see_other
     end
 
     private

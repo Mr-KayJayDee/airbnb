@@ -6,6 +6,8 @@ export default class extends Controller {
   connect() {
     flatpickr(this.element, {
       enableTime: true,
+      time_24hr: true,
+      "locale": "fr",
     })
   }
 }

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
   root to: "cars#index"
+
   resources :cars do
     resources :bookings, only: [:new, :create]
   end
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :bookings, only: [:index, :show]
     resources :cars
+    root to: "cars#index"
   end
 
 end

@@ -19,6 +19,7 @@
                   <p class="fs-6 mb-0"><strong><%= number_with_delimiter(rented_booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
                   <p class="mb-0 fs-6">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
                   <p class="mb-0 fs-6">Booked from <strong><%= rented_booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= rented_booking.end_date.strftime("%d/%m/%Y") %></strong></p>
+                  <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking.start_date, rented_booking.end_date, rented_booking.car.price_per_day), delimiter: ',', separator: '.') %>$</strong></p>
                 </div>
               <% end %>
             </div>
@@ -45,6 +46,7 @@
               <p class="fs-6 mb-0"><strong><%= number_with_delimiter(rented_booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
               <p class="mb-0 fs-6">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
               <p class="mb-0 fs-6">Booked from <strong><%= rented_booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= rented_booking.end_date.strftime("%d/%m/%Y") %></strong></p>
+              <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking.start_date, rented_booking.end_date, rented_booking.car.price_per_day), delimiter: ',', separator: '.') %>$</strong></p>
             </div>
           <% end %>
         </div>
