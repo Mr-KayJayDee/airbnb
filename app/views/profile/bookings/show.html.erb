@@ -10,7 +10,7 @@
     <h3><%= @booking.car.model %></h3>
     <p class="fs-3">Booked by <strong><%= @booking.user.first_name %></strong></p>
     <p class="fs-3">From <strong><%= @booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @booking.end_date.strftime("%d/%m/%Y") %></strong></p>
-    <%= cl_image_tag @booking.car.photos.first.key, height: 300, width: 400, crop: :fill, class: "img-fluid rounded" %>
+    <%= render 'shared/image_carousel', carousel_id: @booking.car.id, photos: @booking.car.photos %>
 </div>
 
 <%= link_to 'Back', cars_path, class:"btn secondary-btn" %>
