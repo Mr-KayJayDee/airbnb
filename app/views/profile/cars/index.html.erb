@@ -3,7 +3,24 @@
     <div class="d-flex flex-row w-75">
       <%= cl_image_tag current_user.photo.key, width: 250, height: 250, crop: :fill, gravity: :face, radius: :max %>
       <div class="mx-4 d-flex flex-column justify-content-center w-100">
-        <h4><%= current_user.first_name %> <%= current_user.last_name %> - <%= 'X '*5 %></h4>
+        <% bookings = current_user.rented_bookings %>
+        <% rating_count = 0 %>
+        <% sum_of_ratings = 0 %>
+        <% bookings.each do |booking| %>
+          <% if booking.state == "reviewed" %>
+            <% rating_count += 1 %>
+            <% sum_of_ratings += booking.rating %>
+          <% end %>
+        <% end %>
+        <div class="d-flex align-items-center">
+          <h4><%= current_user.first_name %> <%= current_user.last_name %> - </h4>
+          <div class="d-flex align-items-center">
+            <p class="pt-2 px-2 fs-3"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
+            <% if rating_count != 0 %>
+              <p><%= render "shared/star", star_filled: true %></p>
+            <% end %>
+          </div>
+        </div>
         <p><%= current_user.email %></p>
         <p><%= current_user.description ? current_user.description : "No description yet" %></p>
       </div>
