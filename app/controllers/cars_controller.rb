@@ -2,7 +2,12 @@ class CarsController < ApplicationController
   # GET /cars
   def index
     @cars = Car.geocoded
-    @markers = @cars.geocoded.map do |car|
+    if params[:query].present?
+      @results = Car.search(params[:query])
+      @cars_ids = @results.pluck(:id)
+      @cars = @cars.where(id: @cars_ids)
+    end
+    @markers = @cars.map do |car|
       {
         lat: car.latitude,
         lng: car.longitude,
@@ -10,6 +15,7 @@ class CarsController < ApplicationController
         marker_html: render_to_string(partial: "marker", locals: {car: car})
       }
     end
+
   end
 
   # GET /cars/1

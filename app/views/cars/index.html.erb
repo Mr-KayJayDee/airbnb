@@ -1,5 +1,16 @@
 <h1 class="mt-4">Cars list</h1>
-
+<div class="row justify-content-cnter">
+  <div class="col-sm-12 my-3">
+    <%= form_with url: cars_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Rechercher une voiture par marque, modèle ou ville"
+        %>
+      <%= submit_tag "Search", name: "", class: "btn main-btn" %>
+    <% end %>
+  </div>
+</div>
 <div style="width: 100%; height: 300px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
