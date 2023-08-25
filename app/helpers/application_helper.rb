@@ -11,15 +11,22 @@ module ApplicationHelper
     end
   end
 
-  def calculate_amout_paid(start_date, end_date, price_per_day)
+  def calculate_amout_paid(booking, isStats = false)
     # get the day of the date
-    start_date = DateTime.parse(start_date.to_s)
-    end_date = DateTime.parse(end_date.to_s)
+    start_date = DateTime.parse(booking.start_date.to_s)
+    end_date = DateTime.parse(booking.end_date.to_s)
 
     # calculate the number of days
-    number_of_days = (end_date - start_date).to_i + 1
-
-    amount_paid = number_of_days * price_per_day
+    amount_paid = 0
+    if isStats
+      if booking.state == "completed" || booking.state == "reviewed" || booking.state == "accepted"
+        number_of_days = (end_date - start_date).to_i + 1
+        amount_paid = number_of_days * booking.car.price_per_day
+      end
+    else
+      number_of_days = (end_date - start_date).to_i + 1
+      amount_paid = number_of_days * booking.car.price_per_day
+    end
 
     return amount_paid
   end

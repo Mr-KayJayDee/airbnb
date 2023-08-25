@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   namespace :profile do
-    resources :bookings, only: [:index, :show]
+    resources :bookings, only: [:index, :show, :update]
     resources :cars
     root to: "cars#index"
   end

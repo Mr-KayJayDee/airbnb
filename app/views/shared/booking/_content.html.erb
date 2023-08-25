@@ -11,15 +11,15 @@
         <div class="row">
           <% @rented_bookings.each do |rented_booking| %>
             <div class="col-md-3 mb-4">
-              <%= link_to car_path(rented_booking.car), style: 'color: inherit; text-decoration: none;' do %>
+              <%= link_to profile_booking_path(rented_booking), style: 'color: inherit; text-decoration: none;' do %>
                 <div class="d-flex justify-content-between flex-column rounded-4">
-                  <%= render 'shared/image_carousel', carousel_id: rented_booking.car.id, photos: rented_booking.car.photos %>
-                  <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= rented_booking.car.brand %></span></p>
+                  <%= render 'shared/image_carousel', carousel_id: rented_booking.id, photos: rented_booking.car.photos %>
+                  <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= rented_booking.car.brand %></span> - <%= render 'shared/booking_state', booking_state: rented_booking.state %></p>
                   <p class="mb-0"><%= rented_booking.car.model %></p>
                   <p class="fs-6 mb-0"><strong><%= number_with_delimiter(rented_booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
                   <p class="mb-0 fs-6">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
                   <p class="mb-0 fs-6">Booked from <strong><%= rented_booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= rented_booking.end_date.strftime("%d/%m/%Y") %></strong></p>
-                  <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking.start_date, rented_booking.end_date, rented_booking.car.price_per_day), delimiter: ',', separator: '.') %>$</strong></p>
+                  <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking), delimiter: ',', separator: '.') %>$</strong></p>
                 </div>
               <% end %>
             </div>
@@ -38,15 +38,15 @@
     <div class="row">
       <% @rented_bookings.each do |rented_booking| %>
         <div class="col-md-3 mb-4">
-          <%= link_to car_path(rented_booking.car), style: 'color: inherit; text-decoration: none;' do %>
+          <%= link_to profile_booking_path(rented_booking), style: 'color: inherit; text-decoration: none;' do %>
             <div class="d-flex justify-content-between flex-column rounded-4">
-              <%= render 'shared/image_carousel', carousel_id: rented_booking.car.id, photos: rented_booking.car.photos %>
-              <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= rented_booking.car.brand %></span></p>
+              <%= render 'shared/image_carousel', carousel_id: rented_booking.id, photos: rented_booking.car.photos %>
+              <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= rented_booking.car.brand %></span> - <%= render 'shared/booking_state', booking_state: rented_booking.state %></p>
               <p class="mb-0"><%= rented_booking.car.model %></p>
               <p class="fs-6 mb-0"><strong><%= number_with_delimiter(rented_booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
               <p class="mb-0 fs-6">Booked by <strong><%= rented_booking.user.first_name %> <%= rented_booking.user.last_name %></strong></p>
               <p class="mb-0 fs-6">Booked from <strong><%= rented_booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= rented_booking.end_date.strftime("%d/%m/%Y") %></strong></p>
-              <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking.start_date, rented_booking.end_date, rented_booking.car.price_per_day), delimiter: ',', separator: '.') %>$</strong></p>
+              <p class="mb-0 fs-6">Total revenue: <strong><%= number_with_delimiter(calculate_amout_paid(rented_booking), delimiter: ',', separator: '.') %>$</strong></p>
             </div>
           <% end %>
         </div>

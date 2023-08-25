@@ -1,14 +1,14 @@
 <div class="row">
   <% @bookings.each do |booking| %>
     <div class="col-md-3 mb-4">
-      <%= link_to car_path(booking.car), style: 'color: inherit; text-decoration: none;' do %>
+      <%= link_to profile_booking_path(booking), style: 'color: inherit; text-decoration: none;' do %>
         <div class="d-flex justify-content-between flex-column rounded-4">
           <%= render 'shared/image_carousel', carousel_id: booking.id, photos: booking.car.photos %>
-          <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= booking.car.brand %></span></p>
+          <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= booking.car.brand %></span> - <%= render 'shared/booking_state', booking_state: booking.state %></p>
           <p class="mb-0"><%= booking.car.model %></p>
           <p class="fs-6 mb-0"><strong><%= number_with_delimiter(booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
           <p class="mb-0 fs-6">Booked from <strong><%= booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= booking.end_date.strftime("%d/%m/%Y") %></strong></p>
-          <p class="mb-0 fs-6">Total paid: <strong><%= number_with_delimiter(calculate_amout_paid(booking.start_date, booking.end_date, booking.car.price_per_day), delimiter: ',', separator: '.') %>$</strong></p>
+          <p class="mb-0 fs-6">Total paid: <strong><%= number_with_delimiter(calculate_amout_paid(booking), delimiter: ',', separator: '.') %>$</strong></p>
         </div>
       <% end %>
     </div>

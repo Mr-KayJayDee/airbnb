@@ -7,7 +7,7 @@
   <div class="carousel-inner">
     <% photos.each_with_index do |photo, index| %>
       <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-        <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: "img-fluid rounded-4 w-100" %>
+        <%= cl_image_tag photo.key, height: 400, width: 600, crop: :fill, class: "img-fluid rounded-4 w-100" %>
       </div>
     <% end %>
   </div>

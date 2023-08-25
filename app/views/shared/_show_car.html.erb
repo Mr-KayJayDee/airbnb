@@ -1,15 +1,35 @@
 <div class="row">
-  <div class="col-md-3 my-4">
-    <div class="d-flex justify-content-between flex-column rounded-4">
-      <%= render 'shared/image_carousel', carousel_id: @car.id, photos: @car.photos %>
-      <p class="fs-4 mb-0 fw-medium"><span class="fw-bold"><%= @car.brand %></span></p>
-      <p class="mb-0"><%= @car.model %></p>
-      <p class="fs-6 mb-0"><strong><%= number_with_delimiter(@car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
+  <!-- Car Image Carousel Card -->
+  <div class="col-md-7 my-4">
+    <div class="rounded-4">
+      <div class="card-body">
+        <%= render 'shared/image_carousel', carousel_id: @car.id, photos: @car.photos %>
+      </div>
     </div>
   </div>
-<div>
-<%= link_to 'Book this car', new_car_booking_path(@car), class:"btn main-btn" %>
-<% if @car.user == current_user %>
-    <%= link_to 'Delete', profile_car_path(@car), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete, class:"btn danger-btn" %>
-<% end %>
-<%= link_to 'Back', request.referer, class: "btn secondary-btn" %>
+  
+  <!-- Car Information Card -->
+  <div class="col-md-5 my-4 " width="30%">
+    <div class="rounded-4">
+      <div class="card-body">
+        <p class="fs-4 mb-0 fw-medium">
+          <span class="fw-bold"><%= @car.brand %></span>
+        </p>
+        <p class="mb-0"><%= @car.model %></p>
+        <p class="fs-6 mb-0">
+          <strong><%= number_with_delimiter(@car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day
+        </p>
+        <!-- add the full name of the user -->
+        <p class="fs-6 mb-0"><%= @car.user.first_name%> <%= @car.user.last_name %></p>
+        
+      </div>
+    </div>
+    <div class="mt-4">
+      <%= link_to 'Book this car', new_car_booking_path(@car), class: "btn main-btn" %>
+      <% if @car.user == current_user %>
+        <%= link_to 'Delete', profile_car_path(@car), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete, class: "btn danger-btn" %>
+      <% end %>
+      <%= link_to 'Back', request.referer, class: "btn secondary-btn" %>
+    </div>
+  </div>
+</div>

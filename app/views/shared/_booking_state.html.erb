@@ -1,0 +1,13 @@
+<% if booking_state == "pending" %>
+  <span class="text-warning">pending</span>
+<% elsif booking_state == "accepted" %>
+    <span class="text-success">accepted</span>
+<% elsif booking_state == "declined" %>
+    <span class="text-danger">declined</span>
+<% elsif booking_state == "cancelled" %>
+    <span class="text-secondary">cancelled</span>
+<% elsif booking_state == "completed" %>
+    <span class="text-success">completed</span>
+<% elsif booking_state == "reviewed" %>
+    <span class="text-success">reviewed</span>
+<% end %>

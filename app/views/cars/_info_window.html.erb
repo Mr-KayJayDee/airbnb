@@ -5,4 +5,6 @@
   <p class="mb-0"><strong>Model:</strong> <%= car.model %></p>
   <p class="mb-0"><strong>Price per Day:</strong> <%= number_with_delimiter(car.price_per_day, delimiter: ',', separator: '.') %>$/day</p>
   <p class="mb-0"><strong>Location:</strong> <%= car.address %></p>
+  <%= link_to "View Car", car_path(car), class: "btn main-btn" %>
+  
 </div>
