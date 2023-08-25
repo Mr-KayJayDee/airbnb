@@ -56,7 +56,7 @@ gem "devise"
 gem "faker"
 gem "cloudinary"
 gem "geocoder"
-gem "elasticsearch"
+gem "elasticsearch", "~> 7.14"
 gem "searchkick"
 
 group :development, :test do
