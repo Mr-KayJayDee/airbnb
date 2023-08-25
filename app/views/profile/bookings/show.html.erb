@@ -93,7 +93,7 @@
           <% end %>
         <% end %>
         <div class="d-flex align-items-center">
-          <p class="pt-2 px-2 fs-3"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
+          <p class="pt-2 px-2 fs-3 text-main"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
           <% if rating_count != 0 %>
             <p><%= render "shared/star", star_filled: true %></p>
           <% end %>

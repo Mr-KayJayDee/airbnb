@@ -15,7 +15,7 @@
         <div class="d-flex align-items-center">
           <h4><%= current_user.first_name %> <%= current_user.last_name %> - </h4>
           <div class="d-flex align-items-center">
-            <p class="pt-2 px-2 fs-3"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
+            <p class="pt-2 px-2 fs-3 text-main"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
             <% if rating_count != 0 %>
               <p><%= render "shared/star", star_filled: true %></p>
             <% end %>
@@ -37,19 +37,19 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="rounded-4 bg-white shadow text-center p-4">
-          <h2><%= number_with_delimiter(current_user.bookings.count) %></h2>
+          <h2 class="text-main"><%= number_with_delimiter(current_user.bookings.count) %></h2>
           <h3>Bookings</h3>
         </div>
       </div>
       <div class="col-md-4">
         <div class="rounded-4 bg-white shadow text-center p-4">
-          <h2><%= number_with_delimiter(current_user.rented_bookings.count) %></h2>
+          <h2 class="text-main"><%= number_with_delimiter(current_user.rented_bookings.count) %></h2>
           <h3>Rented Bookings</h3>
         </div>
       </div>
       <div class="col-md-4">
         <div class="rounded-4 bg-white shadow text-center p-4">
-          <h2><%= number_with_delimiter(current_user.cars.count) %></h2>
+          <h2 class="text-main"><%= number_with_delimiter(current_user.cars.count) %></h2>
           <h3>Cars</h3>
         </div>
       </div>
@@ -58,7 +58,7 @@
     <div class="row justify-content-center pt-4">
       <div class="col-md-4">
         <div class="rounded-4 bg-white shadow text-center p-4">
-          <h2><%= number_with_delimiter(current_user.rented_bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
+          <h2 class="text-green"><%= number_with_delimiter(current_user.rented_bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
           <h3>Earned</h3>
         </div>
       </div>
@@ -67,13 +67,13 @@
           <% spend = current_user.bookings.sum { |booking| calculate_amout_paid(booking, true) } %>
           <% earned = current_user.rented_bookings.sum { |booking| calculate_amout_paid(booking, true) } %>
           <% difference = earned - spend %>
-          <h2><%= number_with_delimiter(difference) %>$</h2>
+          <h2 class="<%= difference >= 0 ? "text-green" : "text-red" %>"><%= number_with_delimiter(difference) %>$</h2>
           <h3>Difference</h3>
         </div>
       </div>
       <div class="col-md-4">
         <div class="rounded-4 bg-white shadow text-center p-4">
-          <h2><%= number_with_delimiter(current_user.bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
+          <h2 class="text-red"><%= number_with_delimiter(current_user.bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
           <h3>Spent</h3>
         </div>
       </div>

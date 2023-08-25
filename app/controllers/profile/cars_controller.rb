@@ -21,7 +21,7 @@ module Profile
       @car = Car.new(car_params)
       @car.user = current_user
       if @car.save
-        redirect_to car_path(@car), notice: "Car was successfully created.", status: :see_other
+        redirect_to car_path(@car), notice: "The car has been successfully added.", status: :see_other
       else
 
       end
@@ -30,7 +30,7 @@ module Profile
     # PATCH/PUT /cars/1
     def update
       if @car.update(car_params)
-        redirect_to car_path, notice: "Car was successfully updated.", status: :see_other
+        redirect_to car_path, notice: "The car has been successfully updated.", status: :see_other
       else
         render :edit, status: :unprocessable_entity
       end
@@ -39,7 +39,7 @@ module Profile
     # DELETE /car/1
     def destroy
       @car.destroy
-      redirect_to profile_root_path, notice: "Car was successfully destroyed.", status: :see_other
+      redirect_to profile_root_path, notice: "The car has been successfully removed.", status: :see_other
     end
 
     private
