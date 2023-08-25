@@ -83,7 +83,21 @@
       <%= cl_image_tag @booking.user.photo.key, width: 250, height: 250, crop: :fill, gravity: :face, radius: :max %>
       <div class="mx-4 d-flex flex-column justify-content-center align-items-center w-100 p-4">
         <h4><%= @booking.user.first_name %> <%= @booking.user.last_name %></h4>
-        <p><%= 'X '*5 %></p>
+        <% @bookings = @booking.user.rented_bookings %>
+        <% rating_count = 0 %>
+        <% sum_of_ratings = 0 %>
+        <% @bookings.each do |booking| %>
+          <% if booking.state == "reviewed" %>
+            <% rating_count += 1 %>
+            <% sum_of_ratings += booking.rating %>
+          <% end %>
+        <% end %>
+        <div class="d-flex align-items-center">
+          <p class="pt-2 px-2 fs-3"><%= rating_count == 0 ? "No rating yet" : format('%.2f', sum_of_ratings.to_f / rating_count) %></p>
+          <% if rating_count != 0 %>
+            <p><%= render "shared/star", star_filled: true %></p>
+          <% end %>
+        </div>
         <p><%= @booking.user.email %></p>
         <p><%= @booking.user.description ? @booking.user.description : "No description yet" %></p>
       </div>
