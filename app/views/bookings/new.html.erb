@@ -5,7 +5,7 @@
         <h2>Book <%= @car.brand %> <%= @car.model %></h2>
       </div>
       <div class="form-control m-4 p-4 bg-white">
-        <%= simple_form_for [@car, @booking] do |f| %>
+        <%= simple_form_for [@car, @booking], data: { turbo: false } do |f| %>
           <%= f.input :start_date,
                     as: :string,
                     input_html: { data: { controller: "datepicker" } } %>

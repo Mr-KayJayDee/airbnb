@@ -6,6 +6,10 @@ export default class extends Controller {
   connect() {
     flatpickr(this.element, {
       enableTime: true,
+      time_24hr: true,
+      defaultDate: "today",
+      minDate: "today",
+      altInput: true,
     })
   }
 }

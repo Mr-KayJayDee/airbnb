@@ -1,3 +1,72 @@
-<h1 class="mt-4">Cars list</h1>
+<div class="d-flex justify-content-between">
+  <div class="mt-5 d-flex flex-row bg-white p-4 w-100 justify-content-between rounded-4 shadow">
+    <div class="d-flex flex-row w-75">
+      <%= cl_image_tag current_user.photo.key, width: 250, height: 250, crop: :fill, gravity: :face, radius: :max %>
+      <div class="mx-4 d-flex flex-column justify-content-center w-100">
+        <h4><%= current_user.first_name %> <%= current_user.last_name %> - <%= 'X '*5 %></h4>
+        <p><%= current_user.email %></p>
+        <p><%= current_user.description ? current_user.description : "No description yet" %></p>
+      </div>
+    </div>
+    <div>
+      <%= link_to "Edit profile", edit_user_registration_path, class: "btn main-btn" %>
+    </div>
+  </div>
+</div>
 
-<%= render "shared/cars_list" %>
+<% if !current_user.bookings.empty? || !current_user.rented_bookings.empty? %>
+    <h1 class="text-center mt-5">Statistics</h1>
+    
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <h2><%= number_with_delimiter(current_user.bookings.count) %></h2>
+          <h3>Bookings</h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <h2><%= number_with_delimiter(current_user.rented_bookings.count) %></h2>
+          <h3>Rented Bookings</h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <h2><%= number_with_delimiter(current_user.cars.count) %></h2>
+          <h3>Cars</h3>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row justify-content-center pt-4">
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <h2><%= number_with_delimiter(current_user.rented_bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
+          <h3>Earned</h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <% spend = current_user.bookings.sum { |booking| calculate_amout_paid(booking, true) } %>
+          <% earned = current_user.rented_bookings.sum { |booking| calculate_amout_paid(booking, true) } %>
+          <% difference = earned - spend %>
+          <h2><%= number_with_delimiter(difference) %>$</h2>
+          <h3>Difference</h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rounded-4 bg-white shadow text-center p-4">
+          <h2><%= number_with_delimiter(current_user.bookings.sum { |booking| calculate_amout_paid(booking, true) }) %>$</h2>
+          <h3>Spent</h3>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<% if !current_user.cars.empty? %>
+  <h1 class="text-center mt-5">Your cars</h1>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Rent your car", new_profile_car_path, class: "btn main-btn" %>
+  </div>
+  <%= render "shared/cars_list" %>
+<% end %>

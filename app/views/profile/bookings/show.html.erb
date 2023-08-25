@@ -1,16 +1,92 @@
-<h1>Booking Details</h1>
-
-<div class="my-2 p-2 d-flex justify-content-between flex-column shadow-lg p-3 mb-2 bg-white rounded">
-    <div class="d-flex justify-content-between">
-      <div>
-        <h1><strong><%= @booking.car.brand %></strong></h1>
+<div class="d-flex justify-content-between align-items-center w-75">
+  <h1 class="mt-4">Booking Details</h1>
+  <div class="mt-4 px-4">
+    <% if @booking.state == "pending" && @booking.car.user == current_user %>
+      <%= link_to "Accept", profile_booking_path(state: "Accept", id: @booking.id), class: "btn success-btn mr-2", data: { turbo_method: :patch}  %>
+      <%= link_to "Decline", profile_booking_path(state: "Decline", id: @booking.id), class: "btn danger-btn", data: { turbo_method: :patch}  %>
+    <% end %>
+    <% if @booking.state == "pending" && @booking.user == current_user %>
+      <%= link_to "Cancel", profile_booking_path(state: "Cancel", id: @booking.id), class: "btn danger-btn", data: { turbo_method: :patch}  %>
+    <% end %>
+    <% if @booking.state == "accepted" && @booking.car.user == current_user %>
+      <%= link_to "End", profile_booking_path(state: "Complete", id: @booking.id), class: "btn success-btn", data: { turbo_method: :patch}  %>
+    <% end %>
+    <% if @booking.state == "reviewed" %>
+      <div class="stars2">
+        <% 5.times do |i| %>
+          <%= render "shared/star", star_filled: i < @booking.rating %>
+        <% end %>
       </div>
-      <p class="fs-3"><strong><%= number_with_delimiter(@booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
-    </div>
-    <h3><%= @booking.car.model %></h3>
-    <p class="fs-3">Booked by <strong><%= @booking.user.first_name %></strong></p>
-    <p class="fs-3">From <strong><%= @booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @booking.end_date.strftime("%d/%m/%Y") %></strong></p>
-    <%= cl_image_tag @booking.car.photo.key, height: 300, width: 400, crop: :fill, class: "img-fluid rounded" %>
+    <%end%>
+    <% if @booking.state == "completed" && @booking.user == current_user %>
+      <button type="button" class="btn success-btn" data-bs-toggle="modal" data-bs-target="#reviewModal">
+        Review
+      </button>
+
+      <!-- Bootstrap Modal -->
+      <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          <%= simple_form_for [@booking], url: profile_booking_path(state: "Review", id: @booking.id), data: { turbo_method: :patch} do |f| %>
+            <div class="d-flex justify-content-between align-items-center m-4">
+              <h5 class="modal-title" id="reviewModalLabel">Leave a Review</h5>
+              <button type="button" class="btn secondary-btn py-0 px-2" data-bs-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="container d-flex justify-content-center align-items-center">
+              <div class="stars" data-controller="stars">
+                <input class="star star-5" id="star-5" type="radio" name="star" checked />
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star" />
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star" />
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star" />
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star" />
+                <label class="star star-1" for="star-1"></label>
+              </div>
+              <%= f.hidden_field :rating, id: "rating", value: 5 %>
+            </div>
+            <div class="d-flex justify-content-end m-4">
+              <button type="button" class="btn secondary-btn mx-2" data-bs-dismiss="modal">Cancel</button>
+              <%= f.submit "Submit Review", class: "btn main-btn", id: "submitReviewBtn" %>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+      <% javascript_include_tag "stars" %>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to 'Back', cars_path, class:"btn secondary-btn" %>
+
+<div class="d-flex justify-content-between gap-4">
+  <div class="my-4 p-2 d-flex justify-content-between flex-column shadow p-3 bg-white rounded-4 w-75">
+    <div class="d-flex justify-content-between">
+      <div>
+        <p class="mb-0 fs-5"><strong><%= @booking.car.brand %></strong> - <%= render 'shared/booking_state', booking_state: @booking.state %></p>
+      </div>
+      <p class="mb-0 fs-6"><strong><%= number_with_delimiter(@booking.car.price_per_day, delimiter: ',', separator: '.') %>$</strong>/day</p>
+    </div>
+    <p class="mb-0 fs-5"><%= @booking.car.model %></p>
+    <p class="mb-0 fs-6">Booked by <strong><%= @booking.user.first_name %></strong></p>
+    <p class="mb-0 fs-6">From <strong><%= @booking.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @booking.end_date.strftime("%d/%m/%Y") %></strong></p>
+    <p class="mb-0 fs-6">Total price: <strong><%= number_with_delimiter(calculate_amout_paid(@booking), delimiter: ',', separator: '.') %>$</strong></p>
+    <%= render 'shared/image_carousel', carousel_id: @booking.id, photos: @booking.car.photos %>
+  </div>
+
+  <div class="my-4 d-flex flex-column bg-white p-3 w-25 justify-content-between rounded-4 shadow">
+    <div class="d-flex flex-column w-100 justify-content-center align-items-center">
+      <%= cl_image_tag @booking.user.photo.key, width: 250, height: 250, crop: :fill, gravity: :face, radius: :max %>
+      <div class="mx-4 d-flex flex-column justify-content-center align-items-center w-100 p-4">
+        <h4><%= @booking.user.first_name %> <%= @booking.user.last_name %></h4>
+        <p><%= 'X '*5 %></p>
+        <p><%= @booking.user.email %></p>
+        <p><%= @booking.user.description ? @booking.user.description : "No description yet" %></p>
+      </div>
+    </div>
+  </div>
+</div>

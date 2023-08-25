@@ -36,3 +36,16 @@
         color: #959595;
     }
 }
+
+.success-btn {
+    background-color: #95E8B8;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #95E8B8;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+        color: #95E8B8;
+    }
+}

@@ -1,7 +1,7 @@
 class Car < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
-  has_one_attached :photo, dependent: :destroy
+  has_many_attached :photos, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
@@ -9,6 +9,6 @@ class Car < ApplicationRecord
   validates :brand, presence: true
   validates :model, presence: true
   validates :price_per_day, presence: true
-  validates :photo, presence: true
+  validates :photos, presence: true
   validates :address, presence: true
 end
