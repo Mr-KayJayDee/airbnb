@@ -118,12 +118,12 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    elasticsearch (7.17.7)
-      elasticsearch-api (= 7.17.7)
-      elasticsearch-transport (= 7.17.7)
-    elasticsearch-api (7.17.7)
+    elasticsearch (7.13.3)
+      elasticsearch-api (= 7.13.3)
+      elasticsearch-transport (= 7.13.3)
+    elasticsearch-api (7.13.3)
       multi_json
-    elasticsearch-transport (7.17.7)
+    elasticsearch-transport (7.13.3)
       faraday (~> 1)
       multi_json
     erubi (1.12.0)
@@ -332,7 +332,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
-  elasticsearch (~> 7.14)
+  elasticsearch (< 7.14)
   faker
   font-awesome-sass (~> 6.1)
   geocoder
